@@ -14,7 +14,7 @@
     <modules>
         <module>dto</module>
         <module>http-client</module>
-        <module>stat-server</module>
+        <module>stats-server</module>
     </modules>
 
     <dependencies>
