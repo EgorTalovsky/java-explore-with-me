@@ -13,12 +13,12 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 public class StatController {
-    private final StatClient client;
+    private final StatClient statClient;
 
     @PostMapping("/hit")
     @ResponseStatus(HttpStatus.CREATED)
     public void save(@Valid @RequestBody EndpointHitDto endpointHitDto) {
-        client.addHit(endpointHitDto);
+        statClient.addHit(endpointHitDto);
     }
 
     @GetMapping("/stats")
@@ -26,7 +26,7 @@ public class StatController {
                                                 @NotEmpty @RequestParam(value = "end") String end,
                                                 @RequestParam(required = false) List<String> uris,
                                                 @RequestParam(defaultValue = "false") Boolean unique) {
-        return client.getStatistics(start, end, uris, unique);
+        return statClient.getStatistics(start, end, uris, unique);
     }
 }
 

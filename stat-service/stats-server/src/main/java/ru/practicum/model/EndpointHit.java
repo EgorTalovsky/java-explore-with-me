@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
@@ -18,12 +19,16 @@ public class EndpointHit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false)
+    @Column
+    @NotNull
     private String app;
-    @Column(nullable = false)
+    @Column
+    @NotNull
     private String uri;
-    @Column(nullable = false)
+    @Column
+    @NotNull
     private String ip;
-    @Column(name = "created", nullable = false)
+    @Column(name = "created")
+    @NotNull
     private LocalDateTime timestamp;
 }

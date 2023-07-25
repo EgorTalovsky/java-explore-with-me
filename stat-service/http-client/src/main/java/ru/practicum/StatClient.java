@@ -1,7 +1,6 @@
 package ru.practicum;
 
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -39,6 +38,4 @@ public class StatClient extends BaseClient {
         );
         return get("/stats?start={start}&end={end}&uris={uris}&unique={unique}", params);
     }
-
-
 }
