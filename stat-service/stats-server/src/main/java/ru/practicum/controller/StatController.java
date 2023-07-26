@@ -1,7 +1,6 @@
 package ru.practicum.controller;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.EndpointHitDto;
@@ -16,19 +15,12 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 public class StatController {
-    @Autowired
     private final StatService statService;
 
     @PostMapping("/hit")
     @ResponseStatus(HttpStatus.CREATED)
     public EndpointHit save(@Valid @RequestBody EndpointHitDto endpointHitDto) {
-        EndpointHit endpointHit = new EndpointHit(
-                endpointHitDto.getId(),
-                endpointHitDto.getApp(),
-                endpointHitDto.getUri(),
-                endpointHitDto.getIp(),
-                endpointHitDto.getTimestamp());
-        return statService.addHit(endpointHit);
+        return statService.addHit(endpointHitDto);
     }
 
     @GetMapping("/stats")
