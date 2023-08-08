@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.practicum.dto.EndpointHitDto;
 import ru.practicum.dto.ViewStatsDto;
+import ru.practicum.stat.server.exception.IncorrectDateException;
 import ru.practicum.stat.server.model.EndpointHit;
 import ru.practicum.stat.server.repository.StatRepository;
 
@@ -35,6 +36,9 @@ public class StatServiceImpl implements StatService {
         List<ViewStatsDto> statistics = new ArrayList<>();
         LocalDateTime startTime = LocalDateTime.parse(start, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         LocalDateTime endTime = LocalDateTime.parse(end, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        if (startTime.isAfter(endTime)) {
+            throw new IncorrectDateException("Дата начала должна быть раньше даты окончания");
+        }
         if (unique == null)
             unique = false;
         if (uris == null)
