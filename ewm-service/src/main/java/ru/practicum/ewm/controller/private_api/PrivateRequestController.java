@@ -29,16 +29,16 @@ public class PrivateRequestController {
         return requestService.getAllUserRequests(userId);
     }
 
-    @PatchMapping("/{userId}/requests/{requestId}/cancel")
-    public ParticipationRequestDto cancelUserRequest(@PathVariable @Min(0) long userId,
-                                                     @PathVariable @Min(0) long requestId) {
-        return requestService.cancelRequest(userId, requestId);
-    }
-
     @GetMapping("/{userId}/events/{eventId}/requests")
     public List<ParticipationRequestDto> getUserRequestsForEvent(@PathVariable @Min(0) long userId,
                                                                  @PathVariable @Min(0) long eventId) {
         return requestService.getUserRequestsForEvent(userId, eventId);
+    }
+
+    @PatchMapping("/{userId}/requests/{requestId}/cancel")
+    public ParticipationRequestDto cancelUserRequest(@PathVariable @Min(0) long userId,
+                                                     @PathVariable @Min(0) long requestId) {
+        return requestService.cancelRequest(userId, requestId);
     }
 
     @PatchMapping("/{userId}/events/{eventId}/requests")
