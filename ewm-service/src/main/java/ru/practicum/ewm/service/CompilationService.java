@@ -1,8 +1,8 @@
 package ru.practicum.ewm.service;
 
 import org.springframework.data.domain.Pageable;
-import ru.practicum.ewm.model.dto.compilation.UpdateCompilationRequest;
 import ru.practicum.ewm.model.dto.compilation.CompilationDto;
+import ru.practicum.ewm.model.dto.compilation.UpdateCompilationRequest;
 
 import java.util.List;
 

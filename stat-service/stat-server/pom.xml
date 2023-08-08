@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
@@ -67,7 +67,8 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>ru.practicum.stat.server.StatServerApplication</mainClass> <!-- Р—Р°РјРµРЅРёС‚Рµ com.example.MainClass РЅР° РІР°С€ РіР»Р°РІРЅС‹Р№ РєР»Р°СЃСЃ -->
+                    <mainClass>ru.practicum.stat.server.StatServerApplication
+                    </mainClass> <!-- Р—Р°РјРµРЅРёС‚Рµ com.example.MainClass РЅР° РІР°С€ РіР»Р°РІРЅС‹Р№ РєР»Р°СЃСЃ -->
                 </configuration>
             </plugin>
         </plugins>

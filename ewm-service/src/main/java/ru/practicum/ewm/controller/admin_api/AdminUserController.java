@@ -3,9 +3,9 @@ package ru.practicum.ewm.controller.admin_api;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import ru.practicum.ewm.model.mapper.UserMapper;
-import ru.practicum.ewm.model.entity.User;
 import ru.practicum.ewm.model.dto.UserDto;
+import ru.practicum.ewm.model.entity.User;
+import ru.practicum.ewm.model.mapper.UserMapper;
 import ru.practicum.ewm.service.UserService;
 
 import javax.validation.Valid;

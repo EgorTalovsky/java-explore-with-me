@@ -3,9 +3,9 @@ package ru.practicum.ewm.controller.public_api;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewm.model.dto.compilation.CompilationDto;
 import ru.practicum.ewm.service.CompilationService;
-import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.Min;
 import java.util.List;

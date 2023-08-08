@@ -1,11 +1,11 @@
 package ru.practicum.ewm.controller.admin_api;
 
 import lombok.AllArgsConstructor;
-import ru.practicum.ewm.model.dto.compilation.UpdateCompilationRequest;
-import ru.practicum.ewm.model.dto.compilation.CompilationDto;
-import ru.practicum.ewm.service.CompilationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import ru.practicum.ewm.model.dto.compilation.CompilationDto;
+import ru.practicum.ewm.model.dto.compilation.UpdateCompilationRequest;
+import ru.practicum.ewm.service.CompilationService;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;

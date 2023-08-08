@@ -1,7 +1,10 @@
 package ru.practicum.ewm.model.dto.compilation;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import ru.practicum.ewm.model.dto.event.EventShortDto;
-import lombok.*;
 
 import java.util.List;
 

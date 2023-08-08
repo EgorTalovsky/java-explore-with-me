@@ -1,12 +1,12 @@
 package ru.practicum.ewm.repository;
 
-import ru.practicum.ewm.model.entity.event.Event;
-import ru.practicum.ewm.model.entity.event.EventState;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
+import ru.practicum.ewm.model.entity.event.Event;
+import ru.practicum.ewm.model.entity.event.EventState;
 
 import javax.persistence.criteria.Predicate;
 import java.time.LocalDateTime;

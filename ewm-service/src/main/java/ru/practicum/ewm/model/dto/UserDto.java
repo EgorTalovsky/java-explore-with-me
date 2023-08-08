@@ -1,6 +1,9 @@
 package ru.practicum.ewm.model.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -13,6 +16,7 @@ public class UserDto {
     private long id;
     @NotBlank
     private String name;
-    @Email @NotBlank
+    @Email
+    @NotBlank
     private String email;
 }

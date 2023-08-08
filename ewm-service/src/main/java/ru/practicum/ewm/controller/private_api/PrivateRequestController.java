@@ -3,9 +3,9 @@ package ru.practicum.ewm.controller.private_api;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import ru.practicum.ewm.model.dto.request.ParticipationRequestDto;
-import ru.practicum.ewm.model.dto.request.EventRequestStatusUpdateResult;
 import ru.practicum.ewm.model.dto.request.EventRequestStatusUpdateRequest;
+import ru.practicum.ewm.model.dto.request.EventRequestStatusUpdateResult;
+import ru.practicum.ewm.model.dto.request.ParticipationRequestDto;
 import ru.practicum.ewm.service.RequestService;
 
 import javax.validation.constraints.Min;

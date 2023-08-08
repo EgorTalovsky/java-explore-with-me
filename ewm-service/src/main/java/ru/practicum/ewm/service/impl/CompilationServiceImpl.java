@@ -1,15 +1,14 @@
 package ru.practicum.ewm.service.impl;
 
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ru.practicum.ewm.exception.IncorrectFieldException;
 import ru.practicum.ewm.exception.NoDataException;
-import ru.practicum.ewm.model.entity.Compilation;
-import ru.practicum.ewm.model.dto.compilation.UpdateCompilationRequest;
 import ru.practicum.ewm.model.dto.compilation.CompilationDto;
+import ru.practicum.ewm.model.dto.compilation.UpdateCompilationRequest;
 import ru.practicum.ewm.model.dto.event.EventShortDto;
+import ru.practicum.ewm.model.entity.Compilation;
 import ru.practicum.ewm.repository.CompilationRepository;
 import ru.practicum.ewm.service.CompilationService;
 import ru.practicum.ewm.service.EventService;

@@ -1,13 +1,13 @@
 package ru.practicum.ewm.model.mapper;
 
 import ru.practicum.ewm.exception.IncorrectFieldException;
-import ru.practicum.ewm.model.entity.Category;
-import ru.practicum.ewm.model.entity.User;
 import ru.practicum.ewm.model.dto.CategoryDto;
 import ru.practicum.ewm.model.dto.UserDto;
 import ru.practicum.ewm.model.dto.event.EventFullDto;
 import ru.practicum.ewm.model.dto.event.EventShortDto;
 import ru.practicum.ewm.model.dto.event.NewEventDto;
+import ru.practicum.ewm.model.entity.Category;
+import ru.practicum.ewm.model.entity.User;
 import ru.practicum.ewm.model.entity.event.Event;
 import ru.practicum.ewm.model.entity.event.EventState;
 

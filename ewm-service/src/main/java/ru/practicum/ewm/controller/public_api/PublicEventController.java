@@ -3,10 +3,10 @@ package ru.practicum.ewm.controller.public_api;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewm.model.dto.event.EventFullDto;
 import ru.practicum.ewm.model.dto.event.EventShortDto;
 import ru.practicum.ewm.service.EventService;
-import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;

@@ -1,17 +1,17 @@
 package ru.practicum.ewm.service.impl;
 
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 import ru.practicum.ewm.exception.EntityAlreadyExistException;
 import ru.practicum.ewm.exception.IncorrectFieldException;
 import ru.practicum.ewm.exception.NoDataException;
 import ru.practicum.ewm.model.dto.CategoryDto;
-import ru.practicum.ewm.model.mapper.CategoryMapper;
 import ru.practicum.ewm.model.entity.Category;
 import ru.practicum.ewm.model.entity.event.Event;
+import ru.practicum.ewm.model.mapper.CategoryMapper;
 import ru.practicum.ewm.repository.CategoryRepository;
 import ru.practicum.ewm.repository.EventRepository;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
 import ru.practicum.ewm.service.CategoryService;
 
 import java.util.List;

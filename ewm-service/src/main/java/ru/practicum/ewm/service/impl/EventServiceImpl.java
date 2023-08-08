@@ -3,7 +3,6 @@ package ru.practicum.ewm.service.impl;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
 import ru.practicum.client.StatClient;
 import ru.practicum.dto.EndpointHitDto;
 import ru.practicum.ewm.exception.EntityAlreadyExistException;
