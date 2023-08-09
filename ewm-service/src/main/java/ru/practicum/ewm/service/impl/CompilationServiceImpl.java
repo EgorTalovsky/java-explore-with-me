@@ -66,7 +66,8 @@ public class CompilationServiceImpl implements CompilationService {
 
     public CompilationDto updateCompilation(long compId, UpdateCompilationRequest updateCompilationRequest) {
         Compilation compilation = compilationRepository.findById(compId)
-                .orElseThrow(() -> new NoDataException("Компиляция не найдена"));;
+                .orElseThrow(() -> new NoDataException("Компиляция не найдена"));
+        ;
         List<Long> ids;
         if (updateCompilationRequest.getEvents() != null) {
             ids = updateCompilationRequest.getEvents();
@@ -94,7 +95,8 @@ public class CompilationServiceImpl implements CompilationService {
 
     public CompilationDto getCompilationResponseDtoById(long compId) {
         Compilation compilation = compilationRepository.findById(compId)
-                .orElseThrow(() -> new NoDataException("Компиляция не найдена"));;
+                .orElseThrow(() -> new NoDataException("Компиляция не найдена"));
+        ;
         List<EventShortDto> events = eventService.getEventsByIds(compilation.getEvents());
         return CompilationDto.builder()
                 .id(compilation.getId())
