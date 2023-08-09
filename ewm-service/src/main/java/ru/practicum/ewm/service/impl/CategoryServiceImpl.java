@@ -37,18 +37,12 @@ public class CategoryServiceImpl implements CategoryService {
 
     public CategoryDto updateCategory(CategoryDto categoryDto, long catId) {
         categoryDto.setId(catId);
-/*        if (categoryDto.getName() == null) {
-            categoryDto.setName("");
-        }*/
         validateLength(categoryDto.getName().length());
         Category category = categoryRepository.findCategoryByName(categoryDto.getName()).orElse(null);
         if (category != null && category.getId() != categoryDto.getId()) {
             throw new EntityAlreadyExistException("Категория с такими именем уже существует");
         }
         Category findedCategory = getCategoryById(categoryDto.getId());
-        /*if (categoryDto.getName().isEmpty()) {
-            categoryDto.setName(null);
-        }*/
         String name;
         if (categoryDto.getName() != null) {
             name = categoryDto.getName();
