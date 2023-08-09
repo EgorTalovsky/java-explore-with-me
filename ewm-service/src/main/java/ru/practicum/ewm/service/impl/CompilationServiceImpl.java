@@ -23,10 +23,12 @@ public class CompilationServiceImpl implements CompilationService {
     private final EventService eventService;
 
     public CompilationDto addCompilation(UpdateCompilationRequest updateCompilationRequest) {
-        if (updateCompilationRequest.getPinned() == null)
+        if (updateCompilationRequest.getPinned() == null) {
             updateCompilationRequest.setPinned(false);
-        if (updateCompilationRequest.getTitle().length() > 50)
+        }
+        if (updateCompilationRequest.getTitle().length() > 50) {
             throw new IncorrectFieldException("Слишком длинное название, максимум 50 символов");
+        }
         Compilation compilation = Compilation.builder()
                 .events(updateCompilationRequest.getEvents())
                 .title(updateCompilationRequest.getTitle())
@@ -58,21 +60,22 @@ public class CompilationServiceImpl implements CompilationService {
     }
 
     public void deleteCompilation(long compId) {
-        compilationRepository.findById(compId)
-                .orElseThrow(() -> new NoDataException("Подборка не найдена"));
-        ;
+        checkForExistCompilation(compId);
         compilationRepository.deleteById(compId);
     }
 
     public CompilationDto updateCompilation(long compId, UpdateCompilationRequest updateCompilationRequest) {
-        Compilation compilation = getCompilationById(compId);
+        Compilation compilation = compilationRepository.findById(compId)
+                .orElseThrow(() -> new NoDataException("Компиляция не найдена"));;
         List<Long> ids;
-        if (updateCompilationRequest.getEvents() != null)
+        if (updateCompilationRequest.getEvents() != null) {
             ids = updateCompilationRequest.getEvents();
-        else
+        } else {
             ids = null;
-        if (updateCompilationRequest.getTitle() != null && updateCompilationRequest.getTitle().length() > 50)
+        }
+        if (updateCompilationRequest.getTitle() != null && updateCompilationRequest.getTitle().length() > 50) {
             throw new IncorrectFieldException("Слишком длинное название, максимум 50 символов");
+        }
         Compilation newCompilationToSave = Compilation.builder()
                 .id(compilation.getId())
                 .title(updateCompilationRequest.getTitle() != null ? updateCompilationRequest.getTitle() : compilation.getTitle())
@@ -90,7 +93,8 @@ public class CompilationServiceImpl implements CompilationService {
     }
 
     public CompilationDto getCompilationResponseDtoById(long compId) {
-        Compilation compilation = getCompilationById(compId);
+        Compilation compilation = compilationRepository.findById(compId)
+                .orElseThrow(() -> new NoDataException("Компиляция не найдена"));;
         List<EventShortDto> events = eventService.getEventsByIds(compilation.getEvents());
         return CompilationDto.builder()
                 .id(compilation.getId())
@@ -100,8 +104,9 @@ public class CompilationServiceImpl implements CompilationService {
                 .build();
     }
 
-    private Compilation getCompilationById(long compId) {
-        return compilationRepository.findById(compId)
-                .orElseThrow(() -> new NoDataException("Компиляция не найдена"));
+    private void checkForExistCompilation(long compId) {
+        if (!compilationRepository.existsById(compId)) {
+            throw new NoDataException("Подборка не найдена");
+        }
     }
 }
