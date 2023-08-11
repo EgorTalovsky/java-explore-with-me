@@ -1,0 +1,647 @@
+{
+	"info": {
+		"_postman_id": "31ba7768-0e4b-4511-98f6-c55344547554",
+		"name": "Test feature (subscriptions)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25782122"
+	},
+	"item": [
+		{
+			"name": "Подписка на несущ пользователя",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Ответ должен содержать код статуса 404 и данные в формате json\", function () {\r",
+							"    pm.response.to.be.notFound;    \r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"subscriberId\" : \"1\",\r\n    \"initiatorId\" : \"777\",\r\n    \"isSubscribe\" : \"true\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/subscriptions/subscribe",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"subscriptions",
+						"subscribe"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Подписка несущ пользователем",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Ответ должен содержать код статуса 404 и данные в формате json\", function () {\r",
+							"    pm.response.to.be.notFound;    \r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"subscriberId\" : \"777\",\r\n    \"initiatorId\" : \"1\",\r\n    \"isSubscribe\" : \"true\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/subscriptions/subscribe",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"subscriptions",
+						"subscribe"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Подписка на самого себя",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Ответ должен содержать код статуса 400 и данные в формате json\", function () {\r",
+							"    pm.response.to.be.badRequest;    \r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"subscriberId\" : \"1\",\r\n    \"initiatorId\" : \"1\",\r\n    \"isSubscribe\" : \"true\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/subscriptions/subscribe",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"subscriptions",
+						"subscribe"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Подписка с параметром отписки",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Ответ должен содержать код статуса 400 и данные в формате json\", function () {\r",
+							"    pm.response.to.be.badRequest;    \r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"subscriberId\" : \"2\",\r\n    \"initiatorId\" : \"1\",\r\n    \"isSubscribe\" : \"false\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/subscriptions/subscribe",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"subscriptions",
+						"subscribe"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Корректная подписка 2 на 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
+							"    pm.response.to.have.status(201);  \r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"\r",
+							"const source = JSON.parse(pm.request.body.raw);\r",
+							"const target = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Подписка должа содержать поля: id, subscriberId, initiatorId, isSubscribe, timestamp\", function () {\r",
+							"pm.expect(target).to.have.property('id');\r",
+							"pm.expect(target).to.have.property('subscriberId');\r",
+							"pm.expect(target).to.have.property('initiatorId');\r",
+							"pm.expect(target).to.have.property('isSubscribe');\r",
+							"pm.expect(target).to.have.property('timestamp');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {\r",
+							"    pm.expect(target.id).to.not.be.null;\r",
+							"    pm.expect(target.subscriberId).equal(2, 'subscriberId должен быть 2');\r",
+							"    pm.expect(target.initiatorId).equal(1, 'initiatorId должен быть 1');\r",
+							"    pm.expect(target.isSubscribe).equal(true, 'isSubscribe должно быть true')\r",
+							"    pm.expect(target.timestamp).to.not.be.null;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"subscriberId\" : \"2\",\r\n    \"initiatorId\" : \"1\",\r\n    \"isSubscribe\" : \"true\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/subscriptions/subscribe",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"subscriptions",
+						"subscribe"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Корректная подписка 2 на 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
+							"    pm.response.to.have.status(201);  \r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"\r",
+							"const source = JSON.parse(pm.request.body.raw);\r",
+							"const target = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Подписка должа содержать поля: id, subscriberId, initiatorId, isSubscribe, timestamp\", function () {\r",
+							"pm.expect(target).to.have.property('id');\r",
+							"pm.expect(target).to.have.property('subscriberId');\r",
+							"pm.expect(target).to.have.property('initiatorId');\r",
+							"pm.expect(target).to.have.property('isSubscribe');\r",
+							"pm.expect(target).to.have.property('timestamp');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {\r",
+							"    pm.expect(target.id).to.not.be.null;\r",
+							"    pm.expect(target.subscriberId).equal(2, 'subscriberId должен быть 2');\r",
+							"    pm.expect(target.initiatorId).equal(3, 'initiatorId должен быть 3');\r",
+							"    pm.expect(target.isSubscribe).equal(true, 'isSubscribe должно быть true')\r",
+							"    pm.expect(target.timestamp).to.not.be.null;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"subscriberId\" : \"2\",\r\n    \"initiatorId\" : \"3\",\r\n    \"isSubscribe\" : \"true\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/subscriptions/subscribe",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"subscriptions",
+						"subscribe"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Отписка 2 от 1 с параметром подписки",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Ответ должен содержать код статуса 400 и данные в формате json\", function () {\r",
+							"    pm.response.to.be.badRequest;    \r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"subscriberId\" : \"2\",\r\n    \"initiatorId\" : \"1\",\r\n    \"isSubscribe\" : \"true\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/subscriptions/unsubscribe",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"subscriptions",
+						"unsubscribe"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Отписка 2 от 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function () {\r",
+							"    pm.response.to.have.status(200);  \r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"\r",
+							"const source = JSON.parse(pm.request.body.raw);\r",
+							"const target = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Подписка должа содержать поля: id, subscriberId, initiatorId, isSubscribe, timestamp\", function () {\r",
+							"pm.expect(target).to.have.property('id');\r",
+							"pm.expect(target).to.have.property('subscriberId');\r",
+							"pm.expect(target).to.have.property('initiatorId');\r",
+							"pm.expect(target).to.have.property('isSubscribe');\r",
+							"pm.expect(target).to.have.property('timestamp');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {\r",
+							"    pm.expect(target.id).to.not.be.null;\r",
+							"    pm.expect(target.subscriberId).equal(2, 'subscriberId должен быть 2');\r",
+							"    pm.expect(target.initiatorId).equal(1, 'initiatorId должен быть 1');\r",
+							"    pm.expect(target.isSubscribe).equal(false, 'isSubscribe должно быть false')\r",
+							"    pm.expect(target.timestamp).to.not.be.null;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"subscriberId\" : \"2\",\r\n    \"initiatorId\" : \"1\",\r\n    \"isSubscribe\" : \"false\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/subscriptions/unsubscribe",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"subscriptions",
+						"unsubscribe"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Повторная отписка 2 от 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Ответ должен содержать код статуса 400 и данные в формате json\", function () {\r",
+							"    pm.response.to.be.badRequest;    \r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"subscriberId\" : \"2\",\r\n    \"initiatorId\" : \"1\",\r\n    \"isSubscribe\" : \"false\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/subscriptions/unsubscribe",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"subscriptions",
+						"unsubscribe"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Лента без id инициатора",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Ответ должен содержать код статуса 400 и данные в формате json\", function () {\r",
+							"    pm.response.to.be.badRequest;    \r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/subscriptions/search/initiator?subscriberId=2",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"subscriptions",
+						"search",
+						"initiator"
+					],
+					"query": [
+						{
+							"key": "subscriberId",
+							"value": "2"
+						},
+						{
+							"key": "initId",
+							"value": "3",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Лента событий без id подписчика",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Ответ должен содержать код статуса 400 и данные в формате json\", function () {\r",
+							"    pm.response.to.be.badRequest;    \r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/subscriptions/search/initiator?initiatorId=3",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"subscriptions",
+						"search",
+						"initiator"
+					],
+					"query": [
+						{
+							"key": "subId",
+							"value": "2",
+							"disabled": true
+						},
+						{
+							"key": "initiatorId",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Лента событий одного пользователя (дефолтные параметры)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function () {\r",
+							"    pm.response.to.have.status(200);  \r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"\r",
+							"const target = pm.response.json()[0];\r",
+							"\r",
+							"pm.test(\"Событие должно иметь инициатора с полем initiatorId\", function () {\r",
+							"pm.expect(target).to.have.property('initiator');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {\r",
+							"    pm.expect(target.id).to.not.be.null;\r",
+							"    pm.expect(target.initiator.id).equal(3, 'initiatorId должен быть 3');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/subscriptions/search/initiator?subscriberId=2&initiatorId=3",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"subscriptions",
+						"search",
+						"initiator"
+					],
+					"query": [
+						{
+							"key": "subscriberId",
+							"value": "2"
+						},
+						{
+							"key": "initiatorId",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Лента всех событий",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function () {\r",
+							"    pm.response.to.have.status(200);  \r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"\r",
+							"const target = pm.response.json()[0];\r",
+							"\r",
+							"pm.test(\"Событие должно иметь инициатора с полем initiatorId\", function () {\r",
+							"pm.expect(target).to.have.property('initiator');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {\r",
+							"    pm.expect(target.id).to.not.be.null;\r",
+							"    pm.expect(target.initiator.id).equal(3, 'initiatorId должен быть 3');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/subscriptions/search/all?subscriberId=2",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"subscriptions",
+						"search",
+						"all"
+					],
+					"query": [
+						{
+							"key": "subscriberId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080"
+		}
+	]
+}
